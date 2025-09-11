@@ -6,6 +6,15 @@ public class AnimationManager : MonoBehaviour
     [SerializeField]
     public Animator animator;
 
+    public void Walk(bool isWalking)
+    {
+        if (animator)
+        {
+            Debug.Log("Walking state change: " + isWalking);
+            animator.SetBool("Walk", isWalking);
+        }
+    }
+
     public void Spin()
     {
         if (animator)

@@ -20,6 +20,22 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+		[Header("AnimationManager")]
+    	public AnimationManager animationManager;
+
+		private void Update()
+		{
+			float horizontal = Input.GetAxis("Horizontal");
+        	float vertical = Input.GetAxis("Vertical");
+
+        	bool isWalking = Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f;
+
+        	if (animationManager != null)
+        	{
+         		animationManager.Walk(isWalking);
+        	}
+		}
+
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
