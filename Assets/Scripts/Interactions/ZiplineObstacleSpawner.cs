@@ -165,7 +165,8 @@ public class ZiplineObstacleSpawner : MonoBehaviour
         Vector3 rightEnd = pair.right.zipTransform.position;
 
         // Can change the directly below line of code to be either value in the future rather than a range
-        float randomOffset = Random.Range(-betweenZiplinesRandomness, betweenZiplinesRandomness);
+        // float randomOffset = Random.Range(-betweenZiplinesRandomness, betweenZiplinesRandomness);
+        float randomOffset = (Random.value < 0.5f) ? -betweenZiplinesRandomness : betweenZiplinesRandomness;
         float lerpFactor = 0.5f + randomOffset;
 
         Vector3 startPos = Vector3.Lerp(leftStart, rightStart, lerpFactor);
