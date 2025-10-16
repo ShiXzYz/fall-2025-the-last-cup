@@ -11,7 +11,7 @@ public class SquirtMechanic : MonoBehaviour
 
     // Squirting-specific state
     public bool squirtOn = false;
-    private float currentWater = 100f;
+    private float currentWater = 0f;
     private float fireTimer = 0f;
     private Collider[] selfColliders;
 
