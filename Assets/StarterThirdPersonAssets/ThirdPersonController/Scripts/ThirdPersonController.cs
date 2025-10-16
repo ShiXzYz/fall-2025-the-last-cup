@@ -1,6 +1,11 @@
-﻿ using UnityEngine;
-#if ENABLE_INPUT_SYSTEM 
+﻿using Cinemachine;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Composites;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -22,7 +27,23 @@ namespace StarterAssets
         public float SprintSpeed = 5.335f;
 
         [Tooltip("Player mouse look sensitivity")]
-        public Vector2 lookSensitivity = new Vector2(1, 1);
+        public Vector2 lookSensitivity = new Vector2(3, 3);
+
+        [Tooltip("Player aim sensitivity")]
+        public Vector2 AimSensitivity = new Vector2(1.5f, 1.5f);
+
+        [Tooltip("Move speed of the character in m/s while aiming")]
+        public float AimSpeed = 1.3333333f;
+
+        [Tooltip("Aim transition time in s")]
+        public float AimTransitionTime = 0.15f;
+
+        public Vector3 AimShoulderOffset = new Vector3(0.4f, -0.1f, 0.5f);
+
+        public Vector3 AimShoulderFullPitchOffset = new Vector3(0.3f, -0.05f, 0.8f);
+
+        public float AimRayOffset = 0.5f;
+
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -64,6 +85,8 @@ namespace StarterAssets
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
         public GameObject CinemachineCameraTarget;
 
+        public CinemachineVirtualCamera CinemachineCamData;
+
         [Tooltip("How far in degrees can you move the camera up")]
         public float TopClamp = 70.0f;
 
@@ -77,8 +100,8 @@ namespace StarterAssets
         public bool LockCameraPosition = false;
 
         // cinemachine
-        private float _cinemachineTargetYaw;
-        private float _cinemachineTargetPitch;
+        public float _cinemachineTargetYaw;
+        public float _cinemachineTargetPitch;
 
         // player
         private float _speed;
@@ -87,6 +110,18 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+
+        // aim ids
+        [SerializeField]
+        private float _aimTransitionTime = 0.0f;
+        [SerializeField]
+        private bool _isAiming = false;
+        // Has finished transition
+        public bool _isAimingActive = false;
+        private float _targetAim = 0.0f;
+
+        // If currently aiming what is the location that is being aimed at
+        private Vector3 _aimLocation;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -110,6 +145,8 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
+
+
 
         private bool IsCurrentDeviceMouse
         {
@@ -204,8 +241,10 @@ namespace StarterAssets
                 //Don't multiply mouse input by Time.deltaTime;
                 float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier * lookSensitivity.x;
-                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier * lookSensitivity.y;
+                Vector2 effectiveSensitivity = _isAimingActive ? AimSensitivity : lookSensitivity;
+
+                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier * effectiveSensitivity.x;
+                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier * effectiveSensitivity.y;
             }
 
             // clamp our rotations so our values are limited 360 degrees
@@ -219,8 +258,78 @@ namespace StarterAssets
 
         private void Move()
         {
+            _isAiming = Input.GetKey(KeyCode.Mouse1);
+
+            // Handles transition between aiming and not aiming to allow for camera/animation transition
+            if (_isAiming && !_isAimingActive)
+            {
+                _aimTransitionTime += Time.deltaTime;
+                if (_aimTransitionTime >= AimTransitionTime)
+                {
+                    _aimTransitionTime = AimTransitionTime;
+                    _isAimingActive = true;
+                }
+            }
+            else if (!_isAiming && _isAimingActive)
+            {
+                _aimTransitionTime -= Time.deltaTime;
+                if (_aimTransitionTime <= 0)
+                {
+                    _aimTransitionTime = 0;
+                    _isAimingActive = false;
+                }
+            }
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+
+            float targetSpeed;
+            if (_isAimingActive)
+            {
+                targetSpeed = AimSpeed;
+            }
+            else
+            {
+                targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            }
+
+            Cinemachine3rdPersonFollow personFollow = CinemachineCamData.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+
+            // Adjusts camera based on aim state
+            float mid = (BottomClamp + TopClamp) / 2;
+            float midDiff = TopClamp - mid;
+            float pitchScale = (Mathf.Abs(_cinemachineTargetPitch - mid) / midDiff);
+            Vector3 trueOffSet;
+            if (_aimTransitionTime > 0)
+            {
+                trueOffSet = Vector3.Lerp(AimShoulderOffset, AimShoulderFullPitchOffset, pitchScale);
+            }
+            else
+            {
+                trueOffSet = new Vector3(0, 0, 0);
+            }
+            personFollow.CameraSide = Mathf.Lerp(0.5f, 0.5f + trueOffSet.x, _aimTransitionTime / AimTransitionTime);
+            personFollow.ShoulderOffset.y = Mathf.Lerp(0f, 0 + trueOffSet.y, _aimTransitionTime / AimTransitionTime);
+            personFollow.ShoulderOffset.z = Mathf.Lerp(0f, 0 + trueOffSet.z , _aimTransitionTime / AimTransitionTime);
+
+            // Raycasts from camera to check where to shoot
+            Vector3 rayHitPoint = new Vector3();
+            if (_aimTransitionTime > 0)
+            {
+                Ray cameraRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+                Ray trueRay = new Ray(cameraRay.origin + cameraRay.direction * AimRayOffset, cameraRay.direction);
+
+                RaycastHit cameraHit;
+                Physics.Raycast(trueRay, out cameraHit);
+                // Checks middle
+                if (cameraHit.collider == null)
+                {
+                    rayHitPoint = trueRay.origin + trueRay.direction * 1000;
+                }
+                else
+                {
+                    rayHitPoint = cameraHit.point;
+                }
+            }
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
@@ -259,12 +368,23 @@ namespace StarterAssets
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
-            if (_input.move != Vector2.zero)
+            if (_input.move != Vector2.zero || _aimTransitionTime > 0)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  _mainCamera.transform.eulerAngles.y;
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                    RotationSmoothTime);
+                    _mainCamera.transform.eulerAngles.y;
+                float rotation;
+
+                // Alters rotation based off of aim transition state
+                if (_aimTransitionTime <= 0)
+                {
+                    rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
+                }
+                else
+                {
+                    Vector3 rayDiff = rayHitPoint - gameObject.transform.position;
+                    float resultRot = Mathf.Atan2(rayDiff.x, rayDiff.z) * Mathf.Rad2Deg;
+                    rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, resultRot, ref _rotationVelocity, RotationSmoothTime/3);
+                }
 
                 // rotate to face input direction relative to camera position
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
