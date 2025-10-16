@@ -8315,6 +8315,54 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCapsule
       objectReference: {fileID: 0}
+    - target: {fileID: 7026925414343413259, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
+      propertyPath: AimSpeed
+      value: 1.333333
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026925414343413259, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
+      propertyPath: AimRayOffset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026925414343413259, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
+      propertyPath: AimTransitionTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026925414343413259, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
+      propertyPath: lookSensitivity.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026925414343413259, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
+      propertyPath: lookSensitivity.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026925414343413259, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
+      propertyPath: CinemachineCamData
+      value: 
+      objectReference: {fileID: 1948984364}
+    - target: {fileID: 7026925414343413259, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
+      propertyPath: AimShoulderOffset.x
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026925414343413259, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
+      propertyPath: AimShoulderOffset.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026925414343413259, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
+      propertyPath: AimShoulderOffset.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026925414343413259, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
+      propertyPath: AimShoulderFullPitchOffset.x
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026925414343413259, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
+      propertyPath: AimShoulderFullPitchOffset.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026925414343413259, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
+      propertyPath: AimShoulderFullPitchOffset.z
+      value: 0.85
+      objectReference: {fileID: 0}
     - target: {fileID: 8063871869589066007, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
       propertyPath: animationManager
       value: 
@@ -8757,6 +8805,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1948984364 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3033015732891982872, guid: 1cc8475ff687a344db9d1451f4bcce7a, type: 3}
+  m_PrefabInstance: {fileID: 8978346692025941909}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2109565395 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7825786612702219308, guid: d437432bb6a6c8146b498aeff989a32e, type: 3}
@@ -9710,6 +9769,10 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 1803814221}
+    - target: {fileID: 7566856665028761454, guid: 1cc8475ff687a344db9d1451f4bcce7a, type: 3}
+      propertyPath: CameraDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8079492651300170835, guid: 1cc8475ff687a344db9d1451f4bcce7a, type: 3}
       propertyPath: m_Name
       value: PlayerFollowCamera

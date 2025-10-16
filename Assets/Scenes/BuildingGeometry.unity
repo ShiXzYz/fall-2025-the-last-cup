@@ -2602,7 +2602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6539310248300107183, guid: 56b314bea8fbf4646bb4a59b8f4ccaa6, type: 3}
       propertyPath: m_Name
-      value: cup_straw
+      value: CupStraw
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2659,7 +2659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 894596576895845187, guid: 4a306639b7cd9db4eaf79e9e00022df5, type: 3}
       propertyPath: m_Name
-      value: cup_handle
+      value: CupHandle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

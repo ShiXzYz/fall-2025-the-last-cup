@@ -11,7 +11,7 @@ public class SquirtMechanic : MonoBehaviour
 
     // Squirting-specific state
     public bool squirtOn = false;
-    private float currentWater = 100f;
+    private float currentWater = 0f;
     private float fireTimer = 0f;
     private Collider[] selfColliders;
 
@@ -50,6 +50,12 @@ public class SquirtMechanic : MonoBehaviour
         if (UnityEngine.EventSystems.EventSystem.current != null &&
             UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
 
+        // Refills if previously empty
+        if (currentWater == 0 && HasWater())
+        {
+            currentWater = 100f;
+        }
+
         // Handle squirting input
         if (Input.GetKeyDown(KeyCode.Mouse1) && cupController.HasStraw)
         {
@@ -64,7 +70,7 @@ public class SquirtMechanic : MonoBehaviour
         }
 
         // Handle continuous squirting
-        if (cupController.HasStraw && Input.GetKey(KeyCode.Mouse1) && HasWater())
+        if (cupController.HasStraw && Input.GetKey(KeyCode.Mouse1) && currentWater > 0)
         {
             ProcessSquirting();
         }
@@ -103,8 +109,7 @@ public class SquirtMechanic : MonoBehaviour
         // Access CupController's properties directly
         return cupController.IsFull
             && (cupController.HeldType == ScoopableObject.ScoopType.Water ||
-                cupController.HeldType == ScoopableObject.ScoopType.PouringWater)
-            && currentWater > 0f;
+                cupController.HeldType == ScoopableObject.ScoopType.PouringWater);
     }
 
     private void ProcessSquirting()
@@ -126,7 +131,7 @@ public class SquirtMechanic : MonoBehaviour
         fireTimer += Time.deltaTime;
         float interval = 1f / Mathf.Max(1f, projectileConfig.fireRate);
 
-        while (fireTimer >= interval)
+        while (fireTimer >= interval && cupController.movementController._isAimingActive)
         {
             fireTimer -= interval;
             SpawnWaterDroplet();
@@ -140,7 +145,11 @@ public class SquirtMechanic : MonoBehaviour
         // Calculate spawn position
         const float spawnOffset = 0.06f;
         Vector3 spawnPos = strawTip.position + strawTip.forward * spawnOffset;
-        Vector3 dir = strawTip.forward;
+        Quaternion rotation = Quaternion.Euler(cupController.movementController._cinemachineTargetPitch, cupController.movementController._cinemachineTargetYaw, 0f);
+
+        // Multiply the rotation by Vector3.forward to get the resulting forward vector.
+        Vector3 dir = rotation * Vector3.forward;
+
         Quaternion spawnRot = Quaternion.FromToRotation(Vector3.up, dir);
 
         // Create projectile
