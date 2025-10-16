@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using StarterAssets;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class CupController : MonoBehaviour
 {
     [Header("Cup Components")]
     public SkinnedMeshRenderer cupBodyRenderer;
+
+    public ThirdPersonController movementController;
     public Material defaultMaterial;
     public Transform spawnPoint;
     public GameObject dirtCupPrefab;
