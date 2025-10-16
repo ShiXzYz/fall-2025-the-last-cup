@@ -1,5 +1,66 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3265376100503074144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8147740616816831829}
+  - component: {fileID: 651757028710057956}
+  m_Layer: 0
+  m_Name: ZiplineObjectSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8147740616816831829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265376100503074144}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.19, y: -0.46499997, z: 2.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2256804901836316339}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &651757028710057956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265376100503074144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b70d9c19a22d74b8c85690afb827f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onZiplineObstaclePrefab: {fileID: 5488540336057008143, guid: a60f5f4b702681b43870b06f5492f798, type: 3}
+  betweenZiplinesObstaclePrefab: {fileID: 1101077831582084842, guid: 1f56e2386a64f9941acd2fc1c5eecf63, type: 3}
+  onZiplineMinSpawnInterval: 8
+  onZiplineMaxSpawnInterval: 10
+  onZiplineHangOffset: {x: 0, y: -2.15, z: 0}
+  betweenZiplinesMinSpawnInterval: 8
+  betweenZiplinesMaxSpawnInterval: 10
+  betweenZiplinesHangOffset: {x: 0, y: -1, z: 0}
+  betweenZiplinesRandomness: 0.25
+  ziplines:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enableSpawning: 1
 --- !u!1 &5412168576371745707
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +92,7 @@ Transform:
   m_Children:
   - {fileID: 618286124952384915}
   - {fileID: 1729588707412624039}
+  - {fileID: 8147740616816831829}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6560332851989473127
