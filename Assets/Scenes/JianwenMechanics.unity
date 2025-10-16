@@ -565,67 +565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79cdd8484aabdb4ba687befc6cea43a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &81864614
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 81864616}
-  - component: {fileID: 81864615}
-  m_Layer: 0
-  m_Name: ZiplineObjectSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &81864615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81864614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b70d9c19a22d74b8c85690afb827f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onZiplineObstaclePrefab: {fileID: 5488540336057008143, guid: a60f5f4b702681b43870b06f5492f798, type: 3}
-  betweenZiplinesObstaclePrefab: {fileID: 1101077831582084842, guid: 1f56e2386a64f9941acd2fc1c5eecf63, type: 3}
-  onZiplineMinSpawnInterval: 8
-  onZiplineMaxSpawnInterval: 10
-  onZiplineHangOffset: {x: 0, y: -2.15, z: 0}
-  betweenZiplinesMinSpawnInterval: 8
-  betweenZiplinesMaxSpawnInterval: 10
-  betweenZiplinesHangOffset: {x: 0, y: -1, z: 0}
-  betweenZiplinesRandomness: 0.25
-  ziplines:
-  - {fileID: 81305384}
-  - {fileID: 1340952120}
-  - {fileID: 435117237}
-  - {fileID: 789610633}
-  - {fileID: 1505869037}
-  - {fileID: 1662637136}
-  enableSpawning: 1
---- !u!4 &81864616
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81864614}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &82415272
 GameObject:
   m_ObjectHideFlags: 0
@@ -8255,10 +8194,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 627451777632920414, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
-      propertyPath: canPush
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1044206370189926961, guid: b988db11b27b8644bbd3b8d074554ee6, type: 3}
       propertyPath: animationManager
       value: 
@@ -8942,10 +8877,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: OnZiplineObstacle
       objectReference: {fileID: 0}
-    - target: {fileID: 5488540336057008143, guid: a60f5f4b702681b43870b06f5492f798, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5840044420713898455, guid: a60f5f4b702681b43870b06f5492f798, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -9077,10 +9008,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zipline1
       objectReference: {fileID: 0}
-    - target: {fileID: 1582543866377477107, guid: e0d244083925df641b599032b01c4b3b, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 2647917230671439419, guid: e0d244083925df641b599032b01c4b3b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.5
@@ -9121,42 +9048,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3414100932025189759, guid: e0d244083925df641b599032b01c4b3b, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 7429221701515789806, guid: e0d244083925df641b599032b01c4b3b, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 7794498724034685897, guid: e0d244083925df641b599032b01c4b3b, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 7905243041908624474, guid: e0d244083925df641b599032b01c4b3b, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1327055177}
     - target: {fileID: 7905243041908624474, guid: e0d244083925df641b599032b01c4b3b, type: 3}
       propertyPath: targetZip
       value: 
       objectReference: {fileID: 1340952120}
     - target: {fileID: 7905243041908624474, guid: e0d244083925df641b599032b01c4b3b, type: 3}
-      propertyPath: ziplineFOV
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 7905243041908624474, guid: e0d244083925df641b599032b01c4b3b, type: 3}
-      propertyPath: camLookUpPitch
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7905243041908624474, guid: e0d244083925df641b599032b01c4b3b, type: 3}
       propertyPath: animationManager
       value: 
       objectReference: {fileID: 1338489537}
-    - target: {fileID: 7905243041908624474, guid: e0d244083925df641b599032b01c4b3b, type: 3}
-      propertyPath: camLocalOffset.y
-      value: -0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7905243041908624474, guid: e0d244083925df641b599032b01c4b3b, type: 3}
       propertyPath: maxDodgeDistance
       value: 0.01
@@ -9626,6 +9525,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 651757028710057956, guid: 9524933c7921977459973a0970add5f6, type: 3}
+      propertyPath: 'ziplines.Array.data[0]'
+      value: 
+      objectReference: {fileID: 81305384}
+    - target: {fileID: 651757028710057956, guid: 9524933c7921977459973a0970add5f6, type: 3}
+      propertyPath: 'ziplines.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1340952120}
+    - target: {fileID: 651757028710057956, guid: 9524933c7921977459973a0970add5f6, type: 3}
+      propertyPath: 'ziplines.Array.data[2]'
+      value: 
+      objectReference: {fileID: 435117237}
+    - target: {fileID: 651757028710057956, guid: 9524933c7921977459973a0970add5f6, type: 3}
+      propertyPath: 'ziplines.Array.data[3]'
+      value: 
+      objectReference: {fileID: 789610633}
+    - target: {fileID: 651757028710057956, guid: 9524933c7921977459973a0970add5f6, type: 3}
+      propertyPath: 'ziplines.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1505869037}
+    - target: {fileID: 651757028710057956, guid: 9524933c7921977459973a0970add5f6, type: 3}
+      propertyPath: 'ziplines.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1662637136}
     - target: {fileID: 2256804901836316339, guid: 9524933c7921977459973a0970add5f6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.19
@@ -9698,10 +9621,6 @@ PrefabInstance:
     - target: {fileID: 1101077831582084842, guid: 1f56e2386a64f9941acd2fc1c5eecf63, type: 3}
       propertyPath: m_Name
       value: BetweenZiplineObstacle
-      objectReference: {fileID: 0}
-    - target: {fileID: 1101077831582084842, guid: 1f56e2386a64f9941acd2fc1c5eecf63, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6182274009385417723, guid: 1f56e2386a64f9941acd2fc1c5eecf63, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9837,4 +9756,3 @@ SceneRoots:
   - {fileID: 896827811}
   - {fileID: 1324366311}
   - {fileID: 8361807558860476094}
-  - {fileID: 81864616}

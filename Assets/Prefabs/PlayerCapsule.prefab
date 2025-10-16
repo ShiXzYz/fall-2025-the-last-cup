@@ -256,13 +256,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 4
   SprintSpeed: 6
-  lookSensitivity: {x: 1, y: 1}
+  lookSensitivity: {x: 3, y: 3}
   AimSensitivity: {x: 1.5, y: 1.5}
-  AimSpeed: 1.3333333
-  AimTransitionTime: 0.15
-  AimShoulderOffset: {x: 0.4, y: -0.1, z: 0.5}
-  AimShoulderFullPitchOffset: {x: 0.3, y: -0.05, z: 0.8}
-  AimRayOffset: 0.5
+  AimSpeed: 1.333333
+  AimTransitionTime: 0.1
+  AimShoulderOffset: {x: 0.45, y: 0.1, z: 0.6}
+  AimShoulderFullPitchOffset: {x: 0.35, y: 0.2, z: 0.85}
+  AimRayOffset: 2
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   JumpHeight: 2
