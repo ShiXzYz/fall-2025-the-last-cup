@@ -257,6 +257,12 @@ MonoBehaviour:
   MoveSpeed: 4
   SprintSpeed: 6
   lookSensitivity: {x: 1, y: 1}
+  AimSensitivity: {x: 1.5, y: 1.5}
+  AimSpeed: 1.3333333
+  AimTransitionTime: 0.15
+  AimShoulderOffset: {x: 0.4, y: -0.1, z: 0.5}
+  AimShoulderFullPitchOffset: {x: 0.3, y: -0.05, z: 0.8}
+  AimRayOffset: 0.5
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   JumpHeight: 2
@@ -270,10 +276,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3841
   CinemachineCameraTarget: {fileID: 3499777991421248227}
+  CinemachineCamData: {fileID: 0}
   TopClamp: 70
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  _cinemachineTargetYaw: 0
+  _cinemachineTargetPitch: 0
+  _aimTransitionTime: 0
+  _isAiming: 0
+  _isAimingActive: 0
 --- !u!114 &627451777632920414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,6 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cupBodyRenderer: {fileID: 4720310507881937721}
+  movementController: {fileID: 7026925414343413259}
   defaultMaterial: {fileID: 2100000, guid: 7e78d5eef4e298f4694f973a136cb0cc, type: 2}
   spawnPoint: {fileID: 2937016638278681527}
   dirtCupPrefab: {fileID: 6497454181553410524, guid: b0ada4d9c0d43da45a912bad7f00e3b0, type: 3}
