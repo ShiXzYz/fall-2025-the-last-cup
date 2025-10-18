@@ -55,6 +55,10 @@ public class SquirtMechanic : MonoBehaviour
         {
             currentWater = 100f;
         }
+        if (currentWater > 0 && !HasWater())
+        {
+            currentWater = 0;
+        }
 
         // Handle squirting input
         if (Input.GetKeyDown(KeyCode.Mouse1) && cupController.HasStraw)
