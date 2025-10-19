@@ -25,15 +25,19 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			float horizontal = Input.GetAxis("Horizontal");
-        	float vertical = Input.GetAxis("Vertical");
+			float horizontal = move.x;
+			float vertical = move.y;
 
-        	bool isWalking = Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f;
+			float speed = new Vector2(horizontal, vertical).magnitude;
 
-        	if (animationManager != null)
-        	{
-         		animationManager.Walk(isWalking);
-        	}
+			if (animationManager != null)
+			{
+				animationManager.Walk(speed);
+			}
+			else
+            {
+				Debug.LogWarning("AnimationManager reference is missing in StarterAssetsInputs.");
+            }
 		}
 
 #if ENABLE_INPUT_SYSTEM
