@@ -25,6 +25,8 @@ namespace StarterAssets
 
 		private void Update()
 		{
+			HandleJumpAnimation();
+
 			float horizontal = move.x;
 			float vertical = move.y;
 
@@ -35,10 +37,19 @@ namespace StarterAssets
 				animationManager.Walk(speed);
 			}
 			else
-            {
+			{
 				Debug.LogWarning("AnimationManager reference is missing in StarterAssetsInputs.");
-            }
+			}
 		}
+
+		private void HandleJumpAnimation(){
+			if (jump && animationManager != null)
+			{
+				// When jumping, set speed to 0 so we don't walk in mid air .-.
+				animationManager.Walk(0f);
+			}
+		}
+
 
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
